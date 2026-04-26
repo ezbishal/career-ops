@@ -1,0 +1,61 @@
+# Career-Ops Profile Configuration
+# This is the single source of truth for your personal data across all modes.
+
+candidate:
+  full_name: "Bishal Adhikari"
+  email: "ezbishal@gmail.com"
+  phone: "07832 549712"
+  location: "London, United Kingdom"
+  # (Optional) Canva resume design ID for visual CV generation via /career-ops pdf.
+  # canva_resume_design_id: "DAxxxxxxxxx"
+
+target_roles:
+  # North Star roles based on current experience (5+ years .NET/Azure/Full-stack)
+  primary:
+    - "Senior Software Engineer"
+    - "Senior .NET Engineer"
+  archetypes:
+    - name: "Senior Full-Stack Engineer"
+      level: "Senior"
+      fit: "primary"        # primary = dream role, secondary = good fit, adjacent = stretch
+    - name: "Senior .NET / Azure Engineer"
+      level: "Senior"
+      fit: "primary"
+    - name: "Cloud Solutions Engineer"
+      level: "Senior"
+      fit: "secondary"
+    - name: "Engineering Lead / Tech Lead"
+      level: "Senior"
+      fit: "adjacent"
+
+narrative:
+  headline: "Full-Stack Software Engineer | .NET · Azure · React · Mobile | 5+ years logistics & digital services"
+  exit_story: "Built and shipped 8 business-critical systems at Rhenus Logistics end-to-end — from customer portal and ERP modules to mobile apps and Azure cloud integrations. Looking for a senior role where I can own complex engineering challenges at scale."
+  superpowers:
+    - "End-to-end delivery ownership (web, API, mobile, cloud)"
+    - "Azure ecosystem depth (APIM, AD B2C, Key Vault, Functions, DevOps pipelines)"
+    - "Cross-platform mobile development (.NET MAUI + React Native/Expo)"
+    - "Translating complex stakeholder requirements into maintainable Agile-delivered solutions"
+    - "Production reliability (Application Insights, proactive alerting, resilient error handling)"
+  proof_points:
+    - name: "Rhenus Logistics — 8 business-critical systems"
+      url: ""
+      hero_metric: "Led end-to-end delivery of 8 products including customer portal, POD mobile app, ERP module, and warehousing scanner"
+    - name: "Yodha.US — React Native app"
+      url: ""
+      hero_metric: "Shipped features for mobile app used by 5M+ users on Google Play and iOS App Store"
+    - name: "Microsoft Certified: Azure AZ-900"
+      url: ""
+      hero_metric: "Validated Azure cloud expertise (2024)"
+
+compensation:
+  target_range: "£65K-85K"
+  currency: "GBP"
+  minimum: "£60K"
+  location_flexibility: "London-based, open to hybrid or remote"
+
+location:
+  country: "United Kingdom"
+  city: "London"
+  timezone: "GMT/BST"
+  visa_status: "Work Sponsorship"

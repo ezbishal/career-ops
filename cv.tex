@@ -1,0 +1,106 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1.3cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{tabularx}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlist[itemize]{leftmargin=1.1em, itemsep=1pt, topsep=1pt}
+\setlength{\tabcolsep}{0pt}
+\setlength{\emergencystretch}{2em}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\vspace{-0.2em}\rule{\linewidth}{0.4pt}]
+\titlespacing*{\section}{0pt}{0.4em}{0.25em}
+
+\newcommand{\cvgroupgap}{\vspace{0.7em}}
+
+\newcommand{\cvrole}[4]{
+	\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
+		\textbf{#1} & #2\\
+		\textit{#3} & \textit{#4}\\
+	\end{tabular*}\\[-0.35em]
+}
+
+\begin{document}
+\raggedright
+
+{\LARGE \textbf{Bishal Adhikari}}\\
+London, United Kingdom \;|\; 07832 549712 \;|\; \href{mailto:ezbishal@gmail.com}{ezbishal@gmail.com}
+
+\section*{Professional Summary}
+Software Engineer with 5+ years of experience building and scaling business-critical web, API, and mobile applications across logistics and digital services. Expert in C\#, .NET, JavaScript/TypeScript, React, SQL Server, and Azure. Proven track record of owning end-to-end delivery, improving production reliability, and shipping secure integrations that support high-volume operations.
+
+\section*{Technical Skills}
+{\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\linewidth}{>{\bfseries}p{2.25cm}X}
+Backend & C\#, .NET, ASP.NET, JavaScript, TypeScript, Node.js, REST APIs, OAuth 2.0 \\
+Frontend & React, Blazor, HTML5, CSS3, Tailwind, Bootstrap \\
+Mobile & .NET MAUI, React Native, Expo \\
+Cloud &  Azure API Management, Azure AD B2C, Key Vault, Azure SQL \\
+DevOps & Azure DevOps, GitHub Actions, CI/CD, Agentic workflow automation \\
+Data & SQL Server, SQLite, LINQ, Entity Framework \\
+Power & Power BI, Power Automate, Power Apps \\
+Quality & Unit testing, Integration testing, Application Insights, Agile Scrum, Git \\
+\end{tabularx}
+}
+
+\section*{Professional Experience}
+\cvrole{Software Engineer}{Mar 2023 -- Present}{Rhenus Logistics}{London, United Kingdom}
+\begin{itemize}
+	\item Led end-to-end delivery across 8 business-critical logistics systems, including internal tools, customer portal, customer API, warehousing scanner, POD mobile app, ERP module, reporting services, and scheduled background services.
+	\item Engineered full-stack features using C\#, .NET, Blazor, React, SQL Server, and Azure to streamline warehouse and freight workflows.
+	\item Built mobile capabilities with .NET MAUI and React Native (Expo), enabling field teams to complete core operational tasks on the move.
+	\item Architected secure cloud integrations with Azure API Management, Key Vault, Storage Accounts, Azure Functions, and Azure App Registrations.
+	\item Automated build and release pipelines in Azure DevOps, improving deployment consistency and reducing release risk across multiple products.
+	\item Implemented reporting and workflow automation with Power BI, Power Automate, and Power Apps, increasing operational visibility and reducing manual processing.
+	\item Strengthened production reliability by creating Application Insights dashboards, proactive alerts, and resilient API error-handling patterns.
+	\item Partnered with product, operations, and architecture stakeholders to translate complex requirements into scalable, maintainable solutions delivered in Agile sprints.
+\end{itemize}
+
+\cvgroupgap
+
+\cvrole{Junior .NET Developer}{Nov 2019 -- Nov 2021}{Yodha.US}{Kathmandu, Nepal}
+\begin{itemize}
+	\item Developed and maintained a backend .NET web application (C\#, ASP.NET MVC, SQL Server) supporting customer-facing counselling journeys and internal operations.
+	\item Delivered features for a React Native (Expo) mobile app used by 5M+ users across Google Play and the iOS App Store.
+	\item Built and maintained REST APIs and third-party integrations using OAuth 2.0 and token-based authentication to support secure partner connectivity.
+	\item Optimized SQL Server queries and schema design to improve application performance and data reliability.
+	\item Increased release quality through unit testing, regression validation, and production support in high-traffic scenarios.
+	\item Collaborated in Agile sprints with product and engineering teams to ship incremental, user-focused enhancements.
+\end{itemize}
+
+\newpage
+
+\section*{Certifications}
+\textbf{Microsoft Certified: Azure AZ-900} \hfill 2024\\
+\textit{Microsoft}\\
+\begin{itemize}
+	\item Validated foundational cloud knowledge across IaaS, PaaS, and SaaS models, Azure global infrastructure, and shared responsibility principles.
+	\item Demonstrated understanding of core Azure services including compute, networking, storage, identity and access management, and governance capabilities.
+	\item Covered Azure pricing, cost management, security, privacy, compliance, and lifecycle support concepts used in enterprise cloud delivery.
+\end{itemize}
+
+\section*{Education}
+\textbf{MSc, Information Systems} \hfill 2022 -- 2023\\
+\textit{University of Greenwich} \hfill \textit{London, United Kingdom}\\
+\vspace{0.15em}
+System Architecture, Enterprise Application Development, Cloud Systems, Mobile Development, IT Governance and Compliance, Data Modelling
+
+\vspace{0.5em}
+
+\textbf{BSc, Computer Science} \hfill 2014 -- 2019\\
+\textit{Tribhuvan University} \hfill \textit{Kathmandu, Nepal}\\
+\vspace{0.15em}
+Data Structures and Algorithms, Object-Oriented Programming, Database Systems, Software Engineering, Artificial Intelligence, Operating Systems
+
+\section*{References}
+References available upon request.
+
+\end{document}

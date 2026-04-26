@@ -1,0 +1,475 @@
+# Portal Scanner Configuration
+# Used by /career-ops scan to discover new offers automatically.
+#
+# Strategy (3 levels):
+#   1. Playwright → careers_url of each company (real-time, reliable)
+#   2. Greenhouse API → structured JSON (fast, Greenhouse-only)
+#   3. WebSearch with site: filters (broad discovery, may be stale)
+#
+# IMPORTANT: Each company in tracked_companies MUST have careers_url.
+#   Prefer the BRANDED company careers URL whenever available; use ATS-hosted URL only as fallback.
+#   ✅ https://careers.monzo.com   ⚠️ https://job-boards.greenhouse.io/monzo (fallback only)
+#   Exception: ATS-hosted careers_url is acceptable when no branded careers page exists.
+
+# -- Title filter --
+# The scanner uses these keywords to decide if a title is relevant.
+# At least 1 positive must match AND 0 negatives must match (case-insensitive).
+
+title_filter:
+  positive:
+    # -- Core target roles --
+    - "Software Engineer"
+    - "Software Developer"
+    - ".NET"
+    - "C#"
+    - "Dotnet"
+    - "ASP.NET"
+    - "Full Stack"
+    - "Full-Stack"
+    - "Fullstack"
+    # -- Backend roles --
+    - "Backend Engineer"
+    - "Backend Developer"
+    - "API Engineer"
+    - "Web Developer"
+    # -- Cloud & platform --
+    - "Azure"
+    - "Cloud Engineer"
+    - "Platform Engineer"
+    - "Cloud Developer"
+    # -- Frontend (secondary) --
+    - "React Developer"
+    - "TypeScript Engineer"
+    # -- Mobile (secondary) --
+    - "Mobile Developer"
+    - "React Native"
+    # -- Broad engineering --
+    - "Solutions Engineer"
+    - "Integration Engineer"
+    - "Systems Engineer"
+    - "DevOps Engineer"
+    - "Site Reliability"
+    - "SRE"
+  negative:
+    # Exclude junior / intern roles
+    - "Junior"
+    - "Intern"
+    - "Graduate"
+    # Exclude stacks irrelevant to profile
+    - "Java "
+    - "PHP"
+    - "Ruby"
+    - "Python"
+    - "Go "
+    - "Golang"
+    - "Rust"
+    - "Scala"
+    - "Kotlin"
+    - "Swift"
+    - "Objective-C"
+    # Exclude hardware / embedded
+    - "Embedded"
+    - "Firmware"
+    - "FPGA"
+    - "ASIC"
+    - "Hardware"
+    # Exclude blockchain / crypto
+    - "Blockchain"
+    - "Web3"
+    - "Crypto"
+    - "Solidity"
+    # Exclude legacy enterprise
+    - "COBOL"
+    - "Mainframe"
+    - "SAP "
+    - "Oracle EBS"
+    - "Salesforce Admin"
+    # Exclude data science / ML / AI specialist
+    - "Machine Learning"
+    - "Data Scientist"
+    - "AI Engineer"
+    - "MLOps"
+    - "LLM"
+  seniority_boost:
+    # These prefixes add relevance but are not required
+    - "Senior"
+    - "Staff"
+    - "Principal"
+    - "Lead"
+    - "Head"
+    - "Director"
+
+# -- Search queries --
+# Each query triggers a WebSearch. Use site: to filter by portal.
+
+search_queries:
+  # -- Greenhouse — .NET & C# --
+  - name: Greenhouse — Senior .NET Engineer UK
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "Senior .NET" OR "Senior Software Engineer" ".NET" OR "C#" London OR "United Kingdom" OR remote'
+    enabled: true
+
+  - name: Greenhouse — Full Stack TypeScript/React UK
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "Full Stack" "React" OR "TypeScript" "Senior" London OR "United Kingdom" OR remote'
+    enabled: true
+
+  - name: Greenhouse — Azure Cloud Engineer UK
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "Azure" "Cloud Engineer" OR "Platform Engineer" OR "Software Engineer" London OR "United Kingdom" OR remote'
+    enabled: true
+
+  # -- Ashby — .NET & Full Stack --
+  - name: Ashby — Senior .NET / C# UK
+    query: 'site:jobs.ashbyhq.com "Senior" ".NET" OR "C#" OR "ASP.NET" London OR "United Kingdom" OR remote'
+    enabled: true
+
+  - name: Ashby — Full Stack Senior UK
+    query: 'site:jobs.ashbyhq.com "Full Stack" OR "Full-Stack" "Senior" "React" OR "TypeScript" London OR "United Kingdom" OR remote'
+    enabled: true
+
+  # -- Lever — .NET & Backend UK --
+  - name: Lever — Senior .NET Engineer UK
+    query: 'site:jobs.lever.co "Senior" ".NET" OR "C#" OR "Backend" London OR "United Kingdom" OR remote'
+    enabled: true
+
+  - name: Lever — Full Stack Senior UK
+    query: 'site:jobs.lever.co "Full Stack" OR "Full-Stack" "Senior" "React" OR "TypeScript" London OR remote'
+    enabled: true
+
+  # -- UK-specific job boards --
+  - name: Reed — Senior .NET London
+    query: 'site:reed.co.uk "Senior .NET Engineer" OR "Senior Software Engineer" ".NET" OR "C#" London OR hybrid'
+    enabled: true
+
+  - name: CWJobs — .NET Engineer London
+    query: 'site:cwjobs.co.uk ".NET" OR "C#" "Senior" London OR hybrid'
+    enabled: true
+
+  - name: Totaljobs — Senior .NET UK
+    query: 'site:totaljobs.com "Senior .NET" OR "Senior Software Engineer" "C#" London OR "United Kingdom"'
+    enabled: true
+
+  - name: CV-Library — .NET Senior UK
+    query: 'site:cv-library.co.uk ".NET" OR "C#" "Senior Engineer" OR "Senior Developer" London OR remote'
+    enabled: true
+
+  - name: Technojobs — .NET Senior UK
+    query: 'site:technojobs.co.uk ".NET" OR "C#" OR "Azure" "Senior" London OR remote'
+    enabled: true
+
+  # -- Remote-friendly boards --
+  - name: WeWorkRemotely — .NET / Full Stack
+    query: 'site:weworkremotely.com ".NET" OR "C#" OR "Full Stack" "Senior" Europe OR UK'
+    enabled: true
+
+  - name: Himalayas — .NET / Azure Senior
+    query: 'site:himalayas.app ".NET" OR "C#" OR "Azure" "Senior Software Engineer" Europe OR UK'
+    enabled: true
+
+  - name: Remotive — .NET / Full Stack
+    query: 'site:remotive.com "Senior" ".NET" OR "C#" OR "Full Stack" "React" Europe'
+    enabled: true
+
+  # -- Logistics tech --
+  - name: Greenhouse — Logistics Tech Engineer UK
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "Software Engineer" OR ".NET" logistics OR "supply chain" OR freight London OR UK OR remote'
+    enabled: true
+
+# -- Tracked companies --
+# Companies whose career pages are checked directly.
+# Focused on UK tech, fintech, logistics tech, and companies known to use .NET/Azure/React.
+
+tracked_companies:
+
+  # -- UK Fintech --
+
+  - name: Monzo
+    careers_url: https://monzo.com/careers
+    scan_method: websearch
+    scan_query: 'site:monzo.com/careers "Software Engineer" OR "Backend" OR "Full Stack" OR "Platform"'
+    notes: "London UK. Digital bank, large engineering org."
+    enabled: true
+
+  - name: Starling Bank
+    careers_url: https://job-boards.greenhouse.io/starlingbank
+    api: https://boards-api.greenhouse.io/v1/boards/starlingbank/jobs
+    notes: "London UK. Cloud-native bank, strong .NET/Azure hiring."
+    enabled: true
+
+  - name: Checkout.com
+    careers_url: https://job-boards.greenhouse.io/checkoutdotcom
+    api: https://boards-api.greenhouse.io/v1/boards/checkoutdotcom/jobs
+    notes: "London UK. Global payments platform, active SWE hiring."
+    enabled: true
+
+  - name: Wise
+    careers_url: https://job-boards.greenhouse.io/transferwise
+    api: https://boards-api.greenhouse.io/v1/boards/transferwise/jobs
+    notes: "London UK. Global money transfer platform."
+    enabled: true
+
+  - name: Revolut
+    careers_url: https://www.revolut.com/careers
+    scan_method: websearch
+    scan_query: 'site:revolut.com/careers "Software Engineer" OR "Backend" OR "Full Stack" OR "Platform Engineer"'
+    notes: "London UK. Global neobank, large SWE org."
+    enabled: true
+
+  - name: OakNorth Bank
+    careers_url: https://job-boards.greenhouse.io/oaknorth
+    api: https://boards-api.greenhouse.io/v1/boards/oaknorth/jobs
+    notes: "London UK. SME lending bank, .NET/Azure stack."
+    enabled: true
+
+  - name: Curve
+    careers_url: https://job-boards.greenhouse.io/curve
+    api: https://boards-api.greenhouse.io/v1/boards/curve/jobs
+    notes: "London UK. All-in-one card platform."
+    enabled: true
+
+  - name: GoCardless
+    careers_url: https://jobs.ashbyhq.com/gocardless
+    notes: "London UK. Open banking payments platform."
+    enabled: true
+
+  - name: Zopa
+    careers_url: https://job-boards.greenhouse.io/zopa
+    api: https://boards-api.greenhouse.io/v1/boards/zopa/jobs
+    notes: "London UK. Digital bank and lending platform."
+    enabled: true
+
+  - name: Paysafe
+    careers_url: https://careers.paysafe.com
+    scan_method: websearch
+    scan_query: 'site:careers.paysafe.com "Software Engineer" OR ".NET" OR "Full Stack" London OR remote'
+    notes: "London UK. Global payments platform, active SWE hiring."
+    enabled: true
+
+  # -- UK eCommerce & Retail Tech --
+
+  - name: Ocado Technology
+    careers_url: https://jobs.ashbyhq.com/ocadogroup
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/ocadogroup OR site:ocadotechnology.com "Software Engineer" OR "Full Stack" OR "Platform" OR ".NET"'
+    notes: "Hatfield / hybrid UK. Logistics + grocery tech, .NET and Azure heavy stack."
+    enabled: true
+
+  - name: ASOS
+    careers_url: https://jobs.asos.com
+    scan_method: websearch
+    scan_query: 'site:jobs.asos.com "Software Engineer" OR ".NET" OR "Full Stack" OR "Backend"'
+    notes: "London UK. Fashion eCommerce, large .NET/Azure engineering org."
+    enabled: true
+
+  - name: Auto Trader UK
+    careers_url: https://careers.autotrader.co.uk
+    scan_method: websearch
+    scan_query: 'site:careers.autotrader.co.uk "Software Engineer" OR "Full Stack" OR "Backend" OR ".NET"'
+    notes: "Manchester / hybrid. Large engineering org, modern stack."
+    enabled: true
+
+  - name: THG (The Hut Group)
+    careers_url: https://jobs.ashbyhq.com/thg
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/thg "Software Engineer" OR ".NET" OR "Full Stack" OR "Backend"'
+    notes: "Manchester UK. eCommerce / beauty tech, large SWE org."
+    enabled: true
+
+  # -- UK Logistics & Supply Chain Tech --
+
+  - name: Sorted Group
+    careers_url: https://job-boards.greenhouse.io/sorted
+    api: https://boards-api.greenhouse.io/v1/boards/sorted/jobs
+    notes: "Manchester UK. Delivery experience platform for eCommerce logistics. .NET stack."
+    enabled: true
+
+  - name: Freightos
+    careers_url: https://jobs.lever.co/freightos
+    notes: "Remote / London. Digital freight marketplace, logistics tech."
+    enabled: true
+
+  - name: Flexport
+    careers_url: https://job-boards.greenhouse.io/flexport
+    api: https://boards-api.greenhouse.io/v1/boards/flexport/jobs
+    notes: "Remote / London. Digital freight forwarding platform."
+    enabled: true
+
+  - name: project44
+    careers_url: https://job-boards.greenhouse.io/project44
+    api: https://boards-api.greenhouse.io/v1/boards/project44/jobs
+    notes: "Remote / London. Supply chain visibility platform, .NET microservices."
+    enabled: true
+
+  - name: Shippeo
+    careers_url: https://jobs.lever.co/shippeo
+    notes: "Remote EU / London. Real-time supply chain visibility."
+    enabled: true
+
+  # -- UK SaaS & B2B Tech --
+
+  - name: Personio
+    careers_url: https://job-boards.greenhouse.io/personio
+    api: https://boards-api.greenhouse.io/v1/boards/personio/jobs
+    notes: "Munich / London. HR SaaS for SMEs, active EU SWE hiring."
+    enabled: true
+
+  - name: Typeform
+    careers_url: https://jobs.lever.co/typeform
+    notes: "Barcelona / remote EU. Forms and data collection platform."
+    enabled: true
+
+  - name: Mimecast
+    careers_url: https://job-boards.greenhouse.io/mimecast
+    api: https://boards-api.greenhouse.io/v1/boards/mimecast/jobs
+    notes: "London UK. Email security and archiving. .NET/Azure stack."
+    enabled: true
+
+  - name: Addepar
+    careers_url: https://job-boards.greenhouse.io/addepar1
+    api: https://boards-api.greenhouse.io/v1/boards/addepar1/jobs
+    notes: "London / Edinburgh / remote. Wealth management platform, Full Stack roles."
+    enabled: true
+
+  - name: Experian
+    careers_url: https://jobs.smartrecruiters.com/Experian
+    scan_method: websearch
+    scan_query: 'site:careers.experian.co.uk "Software Engineer" OR ".NET" OR "Full Stack" OR "Azure" London OR Nottingham OR remote'
+    notes: "Nottingham / London UK. Data & analytics, large .NET/Azure org."
+    enabled: true
+
+  - name: GlobalLogic
+    careers_url: https://jobs.lever.co/globallogic
+    notes: "London / remote. Engineering & digital transformation services, .NET heavy."
+    enabled: true
+
+  - name: Kainos
+    careers_url: https://job-boards.greenhouse.io/kainos
+    api: https://boards-api.greenhouse.io/v1/boards/kainos/jobs
+    notes: "Belfast / London / remote UK. Digital transformation, strong .NET/Azure practice."
+    enabled: true
+
+  # -- UK Travel & Food Tech --
+
+  - name: Skyscanner
+    careers_url: https://job-boards.greenhouse.io/skyscanner
+    api: https://boards-api.greenhouse.io/v1/boards/skyscanner/jobs
+    notes: "Edinburgh / London UK. Travel search platform, large SWE org."
+    enabled: true
+
+  - name: Deliveroo
+    careers_url: https://job-boards.greenhouse.io/deliveroo
+    api: https://boards-api.greenhouse.io/v1/boards/deliveroo/jobs
+    notes: "London UK. Food delivery platform, active SWE hiring."
+    enabled: true
+
+  - name: Just Eat Takeaway
+    careers_url: https://job-boards.greenhouse.io/justeattakeaway
+    api: https://boards-api.greenhouse.io/v1/boards/justeattakeaway/jobs
+    notes: "Amsterdam / London. Food ordering platform, large .NET engineering org."
+    enabled: true
+
+  - name: TUI Group
+    careers_url: https://careers.tui.com
+    scan_method: websearch
+    scan_query: 'site:careers.tui.com "Software Engineer" OR ".NET" OR "Full Stack" OR "Azure" London OR Luton OR remote'
+    notes: "Luton UK. Travel tech, .NET/Azure stack."
+    enabled: true
+
+  # -- UK HealthTech --
+
+  - name: Accurx
+    careers_url: https://jobs.ashbyhq.com/accurx
+    notes: "London UK. Patient communication platform for NHS. Full Stack/Backend."
+    enabled: true
+
+  - name: Babylon Health
+    careers_url: https://job-boards.greenhouse.io/babylonhealth
+    api: https://boards-api.greenhouse.io/v1/boards/babylonhealth/jobs
+    notes: "London UK. Digital health platform."
+    enabled: true
+
+  - name: PatSnap
+    careers_url: https://job-boards.greenhouse.io/patsnap
+    api: https://boards-api.greenhouse.io/v1/boards/patsnap/jobs
+    notes: "London / Singapore. IP intelligence SaaS."
+    enabled: true
+
+  # -- UK PropTech & InsuTech --
+
+  - name: Zego
+    careers_url: https://job-boards.greenhouse.io/zego
+    api: https://boards-api.greenhouse.io/v1/boards/zego/jobs
+    notes: "London UK. Commercial insurance tech."
+    enabled: true
+
+  - name: Tractable
+    careers_url: https://job-boards.greenhouse.io/tractable
+    api: https://boards-api.greenhouse.io/v1/boards/tractable/jobs
+    notes: "London UK. AI for insurance claims, .NET/Azure stack."
+    enabled: true
+
+  - name: Zoopla
+    careers_url: https://jobs.ashbyhq.com/zoopla
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/zoopla "Software Engineer" OR "Full Stack" OR "Backend"'
+    notes: "London UK. Property marketplace, large engineering org."
+    enabled: true
+
+  # -- Telecoms & Media --
+
+  - name: Sky
+    careers_url: https://careers.sky.com
+    scan_method: websearch
+    scan_query: 'site:careers.sky.com "Software Engineer" OR ".NET" OR "Full Stack" OR "Azure" London OR Osterley OR remote'
+    notes: "Isleworth UK. Media/telecoms, large .NET/Azure engineering org."
+    enabled: true
+
+  # -- Big Tech UK --
+
+  - name: Microsoft (UK roles)
+    careers_url: https://jobs.careers.microsoft.com
+    scan_method: websearch
+    scan_query: 'site:careers.microsoft.com "Software Engineer" OR ".NET" OR "Azure" London OR "United Kingdom" senior'
+    notes: "London / Reading UK. Strong .NET/Azure alignment given AZ-900 certification."
+    enabled: true
+
+  - name: Amazon UK
+    careers_url: https://www.amazon.jobs
+    scan_method: websearch
+    scan_query: 'site:amazon.jobs "Software Development Engineer" OR "SDE" London OR "United Kingdom" ".NET" OR "Full Stack"'
+    notes: "London UK. Large SWE org, various full-stack and backend roles."
+    enabled: true
+
+  # -- IT Consulting / Managed Services (UK) --
+
+  - name: Kainos (Greenhouse)
+    careers_url: https://job-boards.greenhouse.io/kainos
+    api: https://boards-api.greenhouse.io/v1/boards/kainos/jobs
+    notes: "Belfast / London / remote. Digital transformation consultancy, .NET/Azure focus."
+    enabled: false
+
+  - name: Atos UK
+    careers_url: https://atos.net/en/careers
+    scan_method: websearch
+    scan_query: 'site:atos.net/en/careers "Software Engineer" OR ".NET" OR "Azure" London OR UK remote'
+    notes: "UK. IT services, .NET/Azure projects."
+    enabled: true
+
+  - name: Capgemini UK
+    careers_url: https://www.capgemini.com/gb-en/careers
+    scan_method: websearch
+    scan_query: 'site:capgemini.com/gb-en/careers "Software Engineer" OR ".NET" OR "Full Stack" OR "Azure" London OR remote senior'
+    notes: "London UK. Consulting + engineering, large .NET/Azure practice."
+    enabled: true
+
+  - name: CGI UK
+    careers_url: https://www.cgi.com/uk/en-gb/careers
+    scan_method: websearch
+    scan_query: 'site:cgi.com/uk/en-gb/careers "Software Engineer" OR ".NET" OR "C#" OR "Azure" London OR UK senior'
+    notes: "London / UK. IT services and outsourcing, .NET/Azure heavy."
+    enabled: true
+
+  - name: Mphasis
+    careers_url: https://careers.mphasis.com
+    scan_method: websearch
+    scan_query: 'site:careers.mphasis.com "Software Engineer" OR ".NET" OR "C#" OR "Azure" London OR UK'
+    notes: "London UK. IT services, strong .NET delivery practice."
+    enabled: true
